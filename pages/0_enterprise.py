@@ -12,16 +12,16 @@ def main():
 
     """Add the employee_email and id and then pick a jon function name for Enterprise Resware Associates"""
 
-    df = pd.DataFrame(
-        [
-            {"employee_email", "employee_id", "job_function_name"}
+    # df = pd.DataFrame(
+    #     [
+    #         {"employee_email", "employee_id", "job_function_name"}
            
-        ]
-    )
+    #     ]
+    # )
 
 
     # create an example list of data
-    data_resware = [
+    data_enterprise = [
         ['john.doe@musicprod.com', 1234567, 'Title & Curative'],
         ['jane.smith@musicprod.com', 2345678, 'Policy'],
         ['david.wong@musicprod.com', 3456789, 'Recording'],
@@ -30,7 +30,7 @@ def main():
     ]
 
     # create a pandas DataFrame with the specified column names
-    df = pd.DataFrame(data_resware, columns=['employee_email', 'employee_id', 'job_function_name']) 
+    df = pd.DataFrame(data_enterprise, columns=['employee_email', 'employee_id', 'job_function_name']) 
     # convert all columns to str
     df.employee_id = df.employee_id.astype(str) 
     df.employee_email = df.employee_email.astype(str)  

@@ -3,37 +3,68 @@ from streamlit_extras.switch_page_button import switch_page
 
 st.set_page_config(layout="centered", page_title="Data Editor", page_icon="🧮")
 
+# Define the authorized usernames and passwords
+authorized_users = {"enterprise_user": "password1", "agency_user": "password2"}
 
-@st.cache_data
-def icon(emoji: str):
-    """Shows an emoji as a Notion-style page icon."""
-    st.write(
-        f'<span style="font-size: 78px; line-height: 1">{emoji}</span>',
-        unsafe_allow_html=True,
+def authenticate(username, password):
+    """
+    Authenticates the user by checking if the username and password match the authorized users.
+    """    
+    if username in authorized_users and password == authorized_users[username]:
+        return True
+    else:
+        return False
+
+def login():
+    """
+    Displays a login form and authenticates the user before showing the Streamlit app.
+    """
+    st.title("Login")
+
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+
+    if st.button("Login"):
+        if authenticate(username, password):
+            st.success("You have successfully logged in!")
+            return True
+        else:
+            st.error("Invalid username or password.")
+            return False
+
+# Authenticate the user before showing the Streamlit app
+if login():
+    pages = ["enterprise", "agency"]
+
+    # Show pages once user is authenticated
+    switch_page(pages)
+
+    @st.cache
+    def icon(emoji: str):
+        """Shows an emoji as a Notion-style page icon."""
+        st.write(
+            f'<span style="font-size: 78px; line-height: 1">{emoji}</span>',
+            unsafe_allow_html=True,
+        )
+
+    icon(":partying_face:")
+    st.title("Streamable - Data Input @ DOMA")
+
+    st.markdown(
+        "Streamable looks just like a dataframe but it's editable! Users can click on"
+        " cells and edit them. The lists are used in Associate Scorecard Dashboards"
     )
 
+    st.sidebar.markdown(
+        """
+        Read more ...
+        """
+    )
 
-icon(":partying_face:")
-st.title("Data Editor has arrived!")
-
-st.markdown(
-    "Streamlit just unveiled the marvelous 🧮 **st.experimental_data_editor** in its latest 1.19"
-    " release. It looks like a dataframe... except it's more: it's editable! Users can click on"
-    " cells and edit them. Curious how that looks like? You're in the right place."
-)
-
-st.markdown(
-    "We cooked some demos (code is available"
-    " [here](https://github.com/streamlit/release-demos/tree/master/1.19.0/data_editor)) to show"
-    " you how it works!"
-)
-
-show = st.button("Jump into the demos!")
-if show:
-    switch_page("demo: annotations")
-
-st.markdown(
-    """
-Read more in the dedicated :balloon: [Streamlit blog post](https://blog.streamlit.io/editable-dataframes-are-here) and in our [docs](https://docs.streamlit.io/library/api-reference/widgets/st.experimental_data_editor).
-"""
-)
+    # Conditionally show pages based on authentication status
+    if authenticate("username", "password"):
+        for page in pages:
+            if page == "enterprise":
+                switch_page(page)
+            elif page == "agency":
+                switch_page(page)
