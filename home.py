@@ -1,10 +1,12 @@
 import streamlit as st
-from streamlit_extras.switch_page_button import switch_page
+import os
+from dotenv import load_dotenv
 
-st.set_page_config(layout="centered", page_title="Data Editor", page_icon="🧮")
+load_dotenv()
+st.set_page_config(layout="centered", page_title="Streamble Data Editor")
 
-# Define the authorized usernames and passwords
-AUTHORIZED_USERS = {"enterprise_user": "password1"}
+# Load authorized usernames and passwords from environment variables
+AUTHORIZED_USERS = {os.getenv("STREAMLIT_USERNAME"): os.getenv("STREAMLIT_PASSWORD")}
 
 def authenticate(username, password):
     """
@@ -17,46 +19,22 @@ def login():
     Displays a login form and authenticates the user before showing the Streamlit app.
     """
     st.title("Login")
-
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
 
     if st.button("Login"):
         if authenticate(username, password):
             st.success("You have successfully logged in!")
-            return True
+            st.write("Choose a business line from the side bar to get started.")      
         else:
             st.error("Invalid username or password.")
-            return False
 
 # Authenticate the user before showing the Streamlit app
-if login():
-    pages = ["enterprise", "agency"]
-
-    # Show pages once user is authenticated
-    switch_page(pages)
-    
-    @st.cache
-    def icon(emoji: str):
-        """Shows an emoji as a Notion-style page icon."""
-        st.write(
-            f'<span style="font-size: 78px; line-height: 1">{emoji}</span>',
-            unsafe_allow_html=True
-        )
-
-    icon(":partying_face:")
-    st.title("Streamable - Data Input @ DOMA")
-    st.markdown(
-        "Streamable looks just like a dataframe but it's editable! Users can click on"
-        " cells and edit them. The lists are used in Associate Scorecard Dashboards"
-    )
-    st.sidebar.markdown(
-        """
-        Read more ...
-        """
-    )
-
-    # Conditionally show pages based on authentication status
-    for page in pages:
-        if authenticate("username", "password"):
-            switch_page(page)
+business_line = login()
+if business_line:
+    if business_line == "Enterprise":
+        st.title("Enterprise page")
+        st.write("This is the enterprise page.")
+    elif business_line == "Agency":
+        st.title("Agency page")
+        st.write("This is the agency page.")

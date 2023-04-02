@@ -20,7 +20,7 @@ def main():
     st.caption("This is the associate list of `Agency`.")
     st.write("")
 
-    """Add the employee_email and id and then pick a job function name for Agency Resware Associates"""
+    """Add the employee_email and id and then pick a team name for Agency Resware Associates"""
 
     # create an example list of data
     data_agency = [
@@ -37,7 +37,7 @@ def main():
     df.team_name = df.team_name.astype("category")
     df.team_name = df.team_name.cat.add_categories(("Promise Prance"))
 
-    st.write("Edit the dataframe below for Job Function:")
+    st.write("Edit the dataframe below for Team:")
     agency_associates = st.experimental_data_editor(
         data=df,
         width=None,
