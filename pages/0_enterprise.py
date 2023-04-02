@@ -32,7 +32,7 @@ def main():
     ]
 
     # create a pandas DataFrame with the specified column names
-    df = pd.DataFrame(data_enterprise, columns=['employee_email', 'employee_id', 'job_function_name']) 
+    df = pd.DataFrame(data_enterprise, columns=['employee_email', 'employee_id', 'team_name']) 
     # convert all columns to str
     df.employee_id = df.employee_id.astype(str) 
     df.employee_email = df.employee_email.astype(str)  
