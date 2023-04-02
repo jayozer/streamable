@@ -24,8 +24,8 @@ def main():
 
     # create an example list of data
     data_agency = [
-        ['john.doe@musicprod.com', 1234567, 'Manager/Director'],
-        ['jane.smith@musicprod.com', 2345678, 'Examiner']
+        ['john.doe@musicprod.com', 1234567, 'Manager'],
+        ['jane.smith@musicprod.com', 2345678, 'Fine-Toothed Combo']
     ]
 
     # create a pandas DataFrame with the specified column names
@@ -34,8 +34,8 @@ def main():
     df.employee_id = df.employee_id.astype(str) 
     df.employee_email = df.employee_email.astype(str)  
 
-    df.job_function_name = df.job_function_name.astype("category")
-    df.job_function_name = df.job_function_name.cat.add_categories(("Title Asisstant"))
+    df.team_name = df.team_name.astype("category")
+    df.team_name = df.team_name.cat.add_categories(("Promise Prance"))
 
     st.write("Edit the dataframe below for Job Function:")
     agency_associates = st.experimental_data_editor(

@@ -24,11 +24,11 @@ def main():
 
     # create an example list of data
     data_enterprise = [
-        ['john.doe@musicprod.com', 1234567, 'Title & Curative'],        
-        ['jane.smith@musicprod.com', 2345678, 'Policy'],
-        ['david.wong@musicprod.com', 3456789, 'Recording'],
-        ['sarah.jones@musicprod.com', 4567890, 'Document Intake'],
-        ['alex.garcia@musicprod.com', 5678901, 'Closing']
+        ['john.doe@musicprod.com', 1234567, 'Ownership & Shuffle'],        
+        ['jane.smith@musicprod.com', 2345678, 'Insurance Dance'],
+        ['david.wong@musicprod.com', 3456789, 'Stampede'],
+        ['sarah.jones@musicprod.com', 4567890, 'Paper Chase'],
+        ['alex.garcia@musicprod.com', 5678901, 'Sign-Off']
     ]
 
     # create a pandas DataFrame with the specified column names
@@ -36,8 +36,8 @@ def main():
     # convert all columns to str
     df.employee_id = df.employee_id.astype(str) 
     df.employee_email = df.employee_email.astype(str)  
-    df.job_function_name = df.job_function_name.astype("category")
-    df.job_function_name = df.job_function_name.cat.add_categories(("Compliance", "Scheduling", "Concierge", "Funding", "Post Closing"))
+    df.team_name = df.team_name.astype("category")
+    df.team_name = df.team_name.cat.add_categories(("Rulebook Rumble", "Calendar Conga", "Service Shuffle", "Money Move", "Aftermath Party"))
 
     st.write("Edit the dataframe below for Job Function:")
     resware_associates = st.experimental_data_editor(
