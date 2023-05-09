@@ -25,7 +25,7 @@ def login():
     if st.button("Login"):
         if authenticate(username, password):
             st.success("You have successfully logged in!")
-            st.write("Choose a business line from the side bar to get started.")      
+            st.write("Choose a sheet from the side bar to get started.")      
         else:
             st.error("Invalid username or password.")
 
@@ -38,3 +38,4 @@ if business_line:
     elif business_line == "Agency":
         st.title("Agency page")
         st.write("This is the agency page.")
+

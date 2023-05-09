@@ -14,6 +14,7 @@ os.environ["SQLALCHEMY_WARN_20"] = "1"
 def main():
     st.set_page_config(layout="centered", page_title="Streamable Data Editor", page_icon="🧮")
     image = "images/dj1.jpeg"
+    
 
     #st.title("My Title<img src='{}' width='100' align='center'>".format(image), unsafe_allow_html=True)
 
@@ -39,12 +40,12 @@ def main():
     df.team_name = df.team_name.astype("category")
     df.team_name = df.team_name.cat.add_categories(("Rulebook Rumble", "Calendar Conga", "Service Shuffle", "Money Move", "Aftermath Party"))
 
-    st.write("Edit the dataframe below for Team:")
+    st.write("Edit the dataframe below: ")
     resware_associates = st.experimental_data_editor(
         data=df,
         width=None,
         height=None,
-        use_container_width=False,
+        use_container_width=True,
         num_rows="dynamic",
         disabled=False,       
         key=None,
