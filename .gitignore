@@ -1,3 +1,7 @@
 env_streamable-1
 check_connection_snowflake.py
 .env
+pages/.streamlit/secrets.toml
+.venv
+venv_streamablepy38
+streampy3_8_10
